@@ -22,6 +22,7 @@ package org.frest.controllers
 		protected var pModel:Array=[];
 		private static var crudTransaction:CRUDTransCrontroller;
 		private var complete:Boolean=true;
+		private var oldAfterTrans:Function;
 		public static function getInstance():CRUDTransCrontroller{
 			if (crudTransaction == null)
 			{
@@ -99,8 +100,13 @@ package org.frest.controllers
 				complete=true;
 				if(actionAfterAllTransactions!=null)
 				{
+					oldAfterTrans=actionAfterAllTransactions;
 					actionAfterAllTransactions.call(this);
-					actionAfterAllTransactions=null;
+					if(oldAfterTrans==actionAfterAllTransactions)
+					{
+						actionAfterAllTransactions=null;
+						oldAfterTrans=null;
+					}
 				}
 			}
 		}
