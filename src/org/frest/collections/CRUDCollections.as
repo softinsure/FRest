@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright  2010-2011 Goutam Malakar. All rights reserved.
- * Author: Goutam 
+ * Copyright  2010-2011 SoftInsure. All rights reserved.
+ * Author: SoftInsure 
  * File Name: CRUDCollections.as 
  * Project Name: FRest 
  * Created Jan 5, 2010
@@ -10,7 +10,7 @@ package org.frest.collections
 	import flash.utils.getQualifiedClassName;
 	/**
 	 * A collection of CRUD objects that are used for a chain of transaction 
-	 * @author Goutam
+	 * @author SoftInsure
 	 * 
 	 */
 	public dynamic class CRUDCollections extends Object

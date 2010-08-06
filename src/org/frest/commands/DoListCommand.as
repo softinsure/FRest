@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright  2010-2011 Goutam Malakar. All rights reserved.
- * Author: Goutam 
+ * Copyright  2010-2011 SoftInsure. All rights reserved.
+ * Author: SoftInsure 
  * File Name: DoListCommand.as 
  * Project Name: FRest 
  * Created Jan 5, 2010
@@ -16,7 +16,7 @@ package org.frest.commands
 	 * used to capture cairmgrom events dispatched from model
 	 * perform list (index)
 	 * extened from GenericCommand
-	 * @author Goutam
+	 * @author SoftInsure
 	 * 
 	 */
 	public class DoListCommand extends GenericCommand

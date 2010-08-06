@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright  2010-2011 Goutam Malakar. All rights reserved.
- * Author: Goutam 
+ * Copyright  2010-2011 SoftInsure. All rights reserved.
+ * Author: SoftInsure 
  * File Name: FrEventNames.as 
  * Project Name: FRest 
  * Created Jan 5, 2010
@@ -9,7 +9,7 @@ package org.frest.events
 {
 	/**
 	 * cairnfrom event 
-	 * @author Goutam
+	 * @author SoftInsure
 	 * 
 	 */
 	public class FrEventNames

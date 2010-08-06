@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright  2010-2011 Goutam Malakar. All rights reserved.
- * Author: Goutam (This file was created from the original file of Kevin Crawford of NovoLogic)
+ * Copyright  2010-2011 SoftInsure. All rights reserved.
+ * Author: SoftInsure (This file was created from the original file of Kevin Crawford of NovoLogic)
  * File Name: DataContainer.as
  * Project Name: FRest
  * Created Jan 5, 2010
@@ -15,7 +15,7 @@ package org.frest.collections
 	 * This Class is used to store objects with a string key
 	 * This file was created from the original file of Kevin Crawford of NovoLogic
 	 * and modified acording to project's needs
-	 * @author Goutam
+	 * @author SoftInsure
 	 *
 	 */
 	public class DataContainer extends Object

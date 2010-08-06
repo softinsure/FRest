@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright  2010-2011 Goutam Malakar. All rights reserved.
- * Author: Goutam 
+ * Copyright  2010-2011 SoftInsure. All rights reserved.
+ * Author: SoftInsure 
  * File Name: FrReferences.as 
  * Project Name: FRest 
  * Created Jan 5, 2010
@@ -12,7 +12,7 @@ package org.frest.models
 	
 	/**
 	 * adding class reference and class path for initialization by class name
-	 * @author Goutam
+	 * @author SoftInsure
 	 * 
 	 */
 	public class FrReferences

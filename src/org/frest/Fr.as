@@ -1,7 +1,7 @@
 /*******************************************************************************
- * Copyright  2010-2011 Goutam Malakar. All rights reserved.
+ * Copyright  2010-2011 SoftInsure. All rights reserved.
  * Inspired by RestfulX and pomodo 
- * Author: Goutam 
+ * Author: SoftInsure 
  * File Name: FrUtils.as 
  * Project Name: FRest 
  * Created Jan 5, 2010
@@ -22,7 +22,7 @@ package org.frest
 	 * Provides central access to a number of frequently used subsystems, configuration 
 	 * options and helpers. Only static functions are available
 	 *  
-	 * @author Goutam
+	 * @author SoftInsure
 	 * 
 	 */	
 	public class Fr

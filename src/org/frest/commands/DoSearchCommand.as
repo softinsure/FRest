@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright  2010-2011 Goutam Malakar. All rights reserved.
- * Author: Goutam 
+ * Copyright  2010-2011 SoftInsure. All rights reserved.
+ * Author: SoftInsure 
  * File Name: DoSearchCommand.as 
  * Project Name: FRest 
  * Created Jan 5, 2010
@@ -16,7 +16,7 @@ package org.frest.commands
 	 * used to capture cairmgrom events dispatched from model
 	 * perform search
 	 * extened from GenericCommand
-	 * @author Goutam
+	 * @author SoftInsure
 	 * 
 	 */
 	public class DoSearchCommand extends GenericCommand

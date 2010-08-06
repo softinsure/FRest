@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright  2010-2011 Goutam Malakar. All rights reserved.
- * Author: Goutam 
+ * Copyright  2010-2011 SoftInsure. All rights reserved.
+ * Author: SoftInsure 
  * File Name: CRUDTransController.as 
  * Project Name: FRest 
  * Created Jan 5, 2010
@@ -12,7 +12,7 @@ package org.frest.controllers
 	/**
 	 * controls CRUD transaction and singletone class
 	 * uses: CRUDTransCrontroller.getInstance()
-	 * @author Goutam
+	 * @author SoftInsure
 	 * 
 	 */
 	public class CRUDTransCrontroller

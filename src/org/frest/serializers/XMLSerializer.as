@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright  2010-2011 Goutam Malakar. All rights reserved.
- * Author: Goutam 
+ * Copyright  2010-2011 SoftInsure. All rights reserved.
+ * Author: SoftInsure 
  * File Name: XMLSerializer.as 
  * Project Name: FRest 
  * Created Jan 5, 2010
@@ -9,7 +9,7 @@ package org.frest.serializers
 {
 	import flash.utils.describeType;
 	
-	import mx.messaging.channels.StreamingAMFChannel;
+	//import mx.messaging.channels.StreamingAMFChannel;
 	import mx.utils.ObjectUtil;
 	
 	import org.frest.Fr;
