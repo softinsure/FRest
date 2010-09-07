@@ -89,5 +89,9 @@ package org.frest.collections
 			}
 			this.addToCollection(key,model);
 		}
+		public function removeModel(model:Object):void
+		{
+			remove(FrUtils.uniqueID(model));
+		}
 	}
 }

@@ -38,7 +38,8 @@ package org.frest.collections
 		{
 			if(this.contains(key))
 			{
-				this[key]=null;
+				delete this[key];
+				//this[key]=null;
 			}
 		}
 	}
