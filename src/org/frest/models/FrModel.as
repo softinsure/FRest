@@ -62,7 +62,7 @@ package org.frest.models
 		[Ignored]
 		public var toBeDeleted:Boolean=false;
 		[Ignored]
-		protected var showMessage:Boolean=true;
+		public var showMessage:Boolean=true;
 		[Ignored]
 		protected var fieldsToUpdate:Array=[];
 
