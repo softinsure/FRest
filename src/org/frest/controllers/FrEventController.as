@@ -8,6 +8,8 @@
 package org.frest.controllers
 {
 	import com.adobe.cairngorm.control.FrontController;
+	
+	//import org.frest.commands.DoAttachmentCommand;
 	import org.frest.commands.DoCRUDCommand;
 	import org.frest.commands.DoListCommand;
 	import org.frest.commands.DoSearchCommand;
@@ -24,6 +26,7 @@ package org.frest.controllers
 			addCommand(FrEventNames.DO_SEARCH, DoSearchCommand);
 			addCommand(FrEventNames.CRUD, DoCRUDCommand);
 			addCommand(FrEventNames.DO_LIST, DoListCommand);
+			//addCommand(FrEventNames.DO_ATTACHMENT,DoAttachmentCommand);
 		}
 	}
 }

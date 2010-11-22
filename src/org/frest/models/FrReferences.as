@@ -8,6 +8,7 @@
 package org.frest.models
 {
 	import flash.utils.getDefinitionByName;
+	
 	import org.frest.utils.FrUtils;
 	
 	/**
@@ -18,27 +19,65 @@ package org.frest.models
 	public class FrReferences
 	{
 		//define class references here
-		private static var modelClassPath:Array=[];
-		public static function initiateReferences():void
+		private var modelClassPath:Array=[];
+		private static var iCtl:FrReferences;
+/*		public static function initiateReferences():void
 		{
 		}
-		public static function addClassPath(classPath:String):void
+*/		public function addClassPath(classPath:String):void
 		{
-			modelClassPath.push(classPath);
+			iCtl.modelClassPath.push(classPath);
 		}
-		public static function initializeClass(className:String):*
+		public function initializeClass(className:String):*
 		{
 			var clazz:Class=null;
+			var hasPath:Boolean=false;
 			className=FrUtils.upperCaseFirst(className);
-			for each (var classPath:String in modelClassPath)
+			for each (var classPath:String in iCtl.modelClassPath)
 			{
-				clazz = getDefinitionByName(classPath+"."+className) as Class;
-				if(clazz!=null)
+				try
 				{
-					return new clazz();
+					clazz = getDefinitionByName(classPath+"."+className) as Class;
+					if(clazz!=null)
+					{
+						hasPath=true;
+						return new clazz();
+					}
+				}
+				catch (e:Error)
+				{
+					continue;
 				}
 			}
-			throw new Error("Class Path for class "+className+" is not defined. Please use FrReferences.addClassPath('XXXX')!");
+			if(!hasPath)
+			{
+				throw new Error("Class Path for class "+className+" is not defined. Please use FrReferences.addClassPath('XXXX')!");
+			}
 		}
+		static protected function generateLock():Class
+		{
+			return SingletonLock;
+		}
+		public static function getInstance():FrReferences
+		{
+			if (iCtl == null)
+			{
+				iCtl = new FrReferences(generateLock());
+			}
+			return iCtl;
+		}
+		public function FrReferences(lock:Class)
+		{
+			if (!lock is SingletonLock)
+			{
+				throw new Error("Error: Instantiation failed: Use FrReferences.getInstance() instead of new.");
+			}
+		}
+	}
+}
+class SingletonLock
+{
+	public function SingletonLock()
+	{
 	}
 }

@@ -12,6 +12,6 @@ package org.frest.controllers
 	public interface IServiceController
 	{
 		function sendRequest(requestURL:String, responder:IResponder, requestMathod:String=null, request:Object=null,sendXML:Boolean=false, resultFormat:String="e4x", useProxy:Boolean=false):void
-		function loadRequest(requestURL:String, responseCatcher:Function, moreArgumentWithCatcher:Array=null, requestMathod:String=null, dataFormat:String="e4x"):void
+		function loadRequest(requestURL:String, responseCatcher:*, moreArgumentWithCatcher:Array=null, requestMathod:String=null, dataFormat:String="e4x"):void
 	}
 }

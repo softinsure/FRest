@@ -25,8 +25,6 @@ package org.frest.commands
 		{
 			super();
 		}
-		public var onSuccess:Function = function (event:Object):void{}
-		public var onFailure:Function = function (event:Object):void{}
 		private var action:String="";
 		private var model:Object="";
 		public override function execute(event:CairngormEvent):void

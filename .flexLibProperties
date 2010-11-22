@@ -3,6 +3,7 @@
   <includeClasses>
     <classEntry path="org.frest.controllers.CRUDTransCrontroller"/>
     <classEntry path="org.frest.collections.FrModelCollection"/>
+    <classEntry path="org.frest.commands.DoAttachmentCommand"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

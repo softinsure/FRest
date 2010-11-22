@@ -49,7 +49,7 @@ package org.frest.serializers
 		}
 		protected function initializeModel(id:String, modelName:String):Object
 		{
-			var model:Object=FrReferences.initializeClass(FrUtils.toCamelCase(modelName));
+			var model:Object=FrReferences.getInstance().initializeClass(FrUtils.toCamelCase(modelName));
 			model["id"]=id;
 			return model;
 		}

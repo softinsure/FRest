@@ -8,11 +8,14 @@
  ****************************************************************************/
 package org.frest
 {
+	import flash.net.FileReference;
+	
 	import mx.logging.ILogger;
 	import mx.logging.Log;
 	import mx.logging.LogEventLevel;
 	import mx.logging.targets.TraceTarget;
 	import mx.rpc.IResponder;
+	
 	import org.frest.controllers.CRUDTransCrontroller;
 	import org.frest.controllers.FrModelsController;
 	import org.frest.controllers.HTTPServiceController;
@@ -44,11 +47,16 @@ package org.frest
    		{
       		httpController.sendRequest(requestURL,responder,requestMathod,request,sendXML,resultFormat,useProxy);
     	}
-   		public static function httpLoad(requestURL:String, responseCatcher:Function, moreArgumentWithCatcher:Array=null, requestMathod:String=null,dataFormat:String="e4x"):void
+   		public static function httpLoad(requestURL:String, responseCatcher:*, moreArgumentWithCatcher:Array=null, requestMathod:String=null,dataFormat:String="e4x"):void
    		{
       		httpController.loadRequest(requestURL,responseCatcher,moreArgumentWithCatcher,requestMathod,dataFormat);
     	}
-		public static function enableLogging():void {
+/*		public static function uploadFile(fileToUplaod:FileReference,requestURL:String, responseCatcher:*,object:Object=null):void
+		//public static function uploadFile(requestURL:String, responseCatcher:*, moreArgumentWithCatcher:Array=null, requestMathod:String=null,dataFormat:String="e4x"):void
+		{
+			httpController.uploadFile(fileToUplaod,requestURL,responseCatcher,object)
+		}
+*/		public static function enableLogging():void {
 			var target:TraceTarget = new TraceTarget();
 			target.filters = ["org.frest.*"];
 			target.level = LogEventLevel.ALL;

@@ -17,5 +17,6 @@ package org.frest.events
 		public static const DO_SEARCH:String="doSearch";
 		public static const CRUD:String="doCRUD";
 		public static const DO_LIST:String="doList";
+		//public static const DO_ATTACHMENT:String="doAttachment";
 	}
 }

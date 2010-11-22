@@ -7,13 +7,22 @@
  ******************************************************************************/
 package org.frest.collections
 {
+	import org.osmf.traits.IDisposable;
+
 	/**
 	 * Collection of objects 
 	 * @author SoftInsure
 	 * 
 	 */
-	public dynamic class FrCollection extends Object
+	public dynamic class FrCollection extends Object implements IDisposable
 	{
+		public function dispose():void
+		{
+			for (var key:String in this)
+			{
+				remove(key);
+			}
+		}
 		public function FrCollection()
 		{
 			super();

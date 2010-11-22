@@ -9,10 +9,21 @@ package org.frest.commands
 {
 	import com.adobe.cairngorm.commands.ICommand;
 	import com.adobe.cairngorm.control.CairngormEvent;
+	
 	import mx.rpc.IResponder;
 	
-	public class GenericCommand implements ICommand, IResponder
+	import org.osmf.traits.IDisposable;
+	
+	public class GenericCommand implements ICommand, IResponder, IDisposable
 	{
+		public function dispose():void
+		{
+			onSuccess=null;
+			onFailure=null;
+		}
+		public var onSuccess:Function=function(event:Object):void{}
+		public var onFailure:Function=function(event:Object):void{}
+
 		public function GenericCommand(){}
 		public function execute(event:CairngormEvent):void{}
 		public function result(data:Object):void{}

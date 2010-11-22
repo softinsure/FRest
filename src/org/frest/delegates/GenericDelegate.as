@@ -7,19 +7,32 @@
  ****************************************************************************/
 package org.frest.delegates
 {
+	import flash.net.FileReference;
+	import flash.net.URLLoaderDataFormat;
+	import flash.net.URLRequestMethod;
+	
+	import mx.containers.utilityClasses.PostScaleAdapter;
 	import mx.rpc.IResponder;
 	
 	import org.frest.Fr;
+	import org.osmf.traits.IDisposable;
 
-	public class GenericDelegate implements IDelegate
+	public class GenericDelegate implements IDelegate, IDisposable
 	{
+		public function dispose():void
+		{
+			_responder=null;
+		}
 		private var _responder : IResponder;
 		public function GenericDelegate(responder:IResponder)
 		{
 			_responder=responder;
 		}
-
-		public function create(restURL:String, object:*=null, objectID:String=null):void
+/*		public function uploadfile(fileToUpload:FileReference,restURL:String, object:*=null, objectID:String=null):void
+		{
+			Fr.uploadFile(fileToUpload,restURL,_responder,object);
+		}
+*/		public function create(restURL:String, object:*=null, objectID:String=null):void
 		{
 			Fr.httpSend(restURL,_responder,"POST",object,true);
 		}

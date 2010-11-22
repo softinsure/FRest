@@ -8,8 +8,12 @@
 package org.frest.controllers
 {
 	import com.adobe.cairngorm.model.IModelLocator;
+	
+	import flash.net.FileReference;
 	import flash.utils.getDefinitionByName;
+	
 	import mx.managers.CursorManager;
+	
 	import org.frest.collections.FrCollection;
 	import org.frest.events.FrEventNames;
 	import org.frest.models.FrModel;
@@ -24,7 +28,7 @@ package org.frest.controllers
 	public class FrModelsController implements IModelLocator
 	{
         private static var modelsController:FrModelsController;
-		public var collections:FrCollection=new FrCollection();;
+		public var collections:FrCollection=new FrCollection();
 		public static function getInstance():FrModelsController
 		{
         	if (modelsController == null)
@@ -126,6 +130,29 @@ package org.frest.controllers
 			FrUtils.cairngormDispatchEvent(FrEventNames.DO_LIST, {"model": object, "onSuccess": onSuccess, "onFailure": onFailure});
 
 		}
+		/*
+		private function invokeCommandAttach(fileRef:FileReference, object:Object, optsOrOnSuccess:Object, onFailure:Function=null):void
+		{
+			//CursorManager.setBusyCursor();
+			var onSuccess:Object=null;
+			if (optsOrOnSuccess != null)
+			{
+				if (optsOrOnSuccess is Function)
+				{
+					onSuccess=optsOrOnSuccess;
+				}
+				else
+				{
+					if (optsOrOnSuccess.hasOwnProperty("onSuccess"))
+						onSuccess=optsOrOnSuccess["onSuccess"];
+					if (optsOrOnSuccess.hasOwnProperty("onFailure"))
+						onFailure=optsOrOnSuccess["onFailure"];
+				}
+			}
+			FrUtils.cairngormDispatchEvent(FrEventNames.DO_ATTACHMENT,{"fileReference":fileRef,"model": object, "onSuccess": onSuccess, "onFailure": onFailure});
+			
+		}
+		*/
 		/**
 		 * used to invoke show 
 		 * @param object
@@ -215,6 +242,19 @@ package org.frest.controllers
 		{
 			invokeCommandList(object,optsOrOnSuccess,onFailure);
 		}
+		/**
+		 * used to attach file 
+		 * @param object
+		 * @param optsOrOnSuccess
+		 * @param onFailure
+		 * 
+		 */
+		/*
+		public function attach(fileRef:FileReference, object:Object, optsOrOnSuccess:Object=null, onFailure:Function=null):void
+		{
+			invokeCommandAttach(fileRef,object,optsOrOnSuccess,onFailure);
+		}
+		*/
 	}
 }
 class SingletonLock

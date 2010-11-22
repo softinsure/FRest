@@ -7,11 +7,14 @@
  ****************************************************************************/
 package org.frest.models
 {
+	import flash.net.FileReference;
+	import flash.net.getClassByAlias;
 	import flash.utils.getQualifiedClassName;
 	
 	import mx.managers.CursorManager;
 	
 	import org.frest.Fr;
+	import org.osmf.traits.IDisposable;
 
 	[Bindable]
 	/**
@@ -19,8 +22,14 @@ package org.frest.models
 	 * @author SoftInsure
 	 * 
 	 */
-	public class FrModel
+	public class FrModel implements IDisposable
 	{
+		public function dispose():void
+		{
+			belongsto=null;
+			fieldsToUpdate=null;
+			result=null;
+		}
 		private var lbl:String;
 
 		/**
@@ -65,11 +74,16 @@ package org.frest.models
 		public var showMessage:Boolean=true;
 		[Ignored]
 		protected var fieldsToUpdate:Array=[];
+		[Ignored]
+		protected var canUseBaseCRUDMethods:Boolean=true;
 
 		[Ignored]
 		protected var result:Object;
 
-		public function FrModel(label:String="id")
+/*		[Ignored]
+		public var attachedFile:FileReference;
+
+*/		public function FrModel(label:String="id")
 		{
 			lbl=label;
 		}
@@ -121,7 +135,10 @@ package org.frest.models
 				case "clone":
 					this.action("clone");
 					break;
-				default:
+/*				case "attach":
+					this.attach();
+					break;
+*/				default:
 					cannotUse();
 					break;
 			}
@@ -137,99 +154,127 @@ package org.frest.models
 			return fieldsToUpdate;
 		}
 		[Ignored]
-		public function show(onSuccess:Function=null,onFailure:Function=null):void
+		public function show(onSuccessDo:Function=null,onFailureDo:Function=null):void
 		{
 			currentAction="show";
-			onSuccess=onSuccess==null?this.onSuccess:onSuccess;
-			onFailure=onFailure==null?this.onFailure:onFailure;
-			Fr.models.show(this,onSuccess,onFailure);
+			checkCannotUse();
+			onSuccessDo=onSuccessDo==null?this.onSuccessDo:onSuccessDo;
+			onFailureDo=onFailureDo==null?this.onFailureDo:onFailureDo;
+			Fr.models.show(this,onSuccessDo,onFailureDo);
 		}
 		[Ignored]
-		public function create(onSuccess:Function=null,onFailure:Function=null):void
+		public function create(onSuccessDo:Function=null,onFailureDo:Function=null):void
 		{
 			currentAction="create";
-			onSuccess=onSuccess==null?this.onSuccess:onSuccess;
-			onFailure=onFailure==null?this.onFailure:onFailure;
-			Fr.models.create(this,onSuccess,onFailure);
+			checkCannotUse();
+			onSuccessDo=onSuccessDo==null?this.onSuccessDo:onSuccessDo;
+			onFailureDo=onFailureDo==null?this.onFailureDo:onFailureDo;
+			Fr.models.create(this,onSuccessDo,onFailureDo);
 		}
 		[Ignored]
-		public function update(onSuccess:Function=null,onFailure:Function=null):void
+		public function update(onSuccessDo:Function=null,onFailureDo:Function=null):void
 		{
+			currentAction="update";
+			checkCannotUse();
 			if(!changed)
 			{
 				return;
 			}
 			changed=false;
-			currentAction="update";
 			//Fr.crudCollection.addTransaction(this);
 			//FrUtils.enableApplication=false;
-			onSuccess=onSuccess==null?this.onSuccess:onSuccess;
-			onFailure=onFailure==null?this.onFailure:onFailure;
-			Fr.models.update(this,onSuccess,onFailure);
+			onSuccessDo=onSuccessDo==null?this.onSuccessDo:onSuccessDo;
+			onFailureDo=onFailureDo==null?this.onFailureDo:onFailureDo;
+			Fr.models.update(this,onSuccessDo,onFailureDo);
 		}
 		[Ignored]
-		public function directUpdate(onSuccess:Function=null,onFailure:Function=null):void
+		public function directUpdate(onSuccessDo:Function=null,onFailureDo:Function=null):void
 		{
+			currentAction="directupdate";
+			checkCannotUse();
 			if(fieldsToUpdate.length<=0)
 			{
 				CursorManager.removeBusyCursor();
 				Fr.crudTransactionQueue.stop();
 				throw new Error("directUpdateArray is blank!->");
 			}
-			currentAction="directupdate";
-			onSuccess=onSuccess==null?this.onSuccess:onSuccess;
-			onFailure=onFailure==null?this.onFailure:onFailure;
-			Fr.models.update(this,onSuccess,onFailure);
+			onSuccessDo=onSuccessDo==null?this.onSuccessDo:onSuccessDo;
+			onFailureDo=onFailureDo==null?this.onFailureDo:onFailureDo;
+			Fr.models.update(this,onSuccessDo,onFailureDo);
 		}
 		[Ignored]
-		public function destroy(onSuccess:Function=null,onFailure:Function=null):void
+		public function destroy(onSuccessDo:Function=null,onFailureDo:Function=null):void
 		{
 			currentAction="destroy";
-			onSuccess=onSuccess==null?this.onSuccess:onSuccess;
-			onFailure=onFailure==null?this.onFailure:onFailure;
-			Fr.models.destroy(this,onSuccess,onFailure);
+			checkCannotUse();
+			onSuccessDo=onSuccessDo==null?this.onSuccessDo:onSuccessDo;
+			onFailureDo=onFailureDo==null?this.onFailureDo:onFailureDo;
+			Fr.models.destroy(this,onSuccessDo,onFailureDo);
 		}
 		[Ignored]
-		public function reload(onSuccess:Function=null,onFailure:Function=null):void
+		public function reload(onSuccessDo:Function=null,onFailureDo:Function=null):void
 		{
 			currentAction="reload";
-			onSuccess=onSuccess==null?this.onSuccess:onSuccess;
-			onFailure=onFailure==null?this.onFailure:onFailure;
-			Fr.models.reload(this,onSuccess,onFailure);
+			checkCannotUse();
+			onSuccessDo=onSuccessDo==null?this.onSuccessDo:onSuccessDo;
+			onFailureDo=onFailureDo==null?this.onFailureDo:onFailureDo;
+			Fr.models.reload(this,onSuccessDo,onFailureDo);
 		}
 		[Ignored]
-		public function search(onSuccess:Function=null,onFailure:Function=null):void
+		public function search(onSuccessDo:Function=null,onFailureDo:Function=null):void
 		{
 			currentAction="search";
-			onSuccess=onSuccess==null?this.onSuccess:onSuccess;
-			onFailure=onFailure==null?this.onFailure:onFailure;
-			Fr.models.search(this,onSuccess,onFailure);
+			checkCannotUse();
+			onSuccessDo=onSuccessDo==null?this.onSuccessDo:onSuccessDo;
+			onFailureDo=onFailureDo==null?this.onFailureDo:onFailureDo;
+			Fr.models.search(this,onSuccessDo,onFailureDo);
 		}
 		[Ignored]
-		public function action(actionName:String,onSuccess:Function=null,onFailure:Function=null):void
+		public function action(actionName:String,onSuccessDo:Function=null,onFailureDo:Function=null):void
 		{
 			currentAction=actionName;
-			onSuccess=onSuccess==null?this.onSuccess:onSuccess;
-			onFailure=onFailure==null?this.onFailure:onFailure;
-			Fr.models.action(actionName,this,onSuccess,onFailure);
+			checkCannotUse();
+			onSuccessDo=onSuccessDo==null?this.onSuccessDo:onSuccessDo;
+			onFailureDo=onFailureDo==null?this.onFailureDo:onFailureDo;
+			Fr.models.action(actionName,this,onSuccessDo,onFailureDo);
 		}
 		[Ignored]
-		public function list(onSuccess:Function=null,onFailure:Function=null):void
+		public function list(onSuccessDo:Function=null,onFailureDo:Function=null):void
 		{
 			currentAction="list";
-			onSuccess=onSuccess==null?this.onSuccess:onSuccess;
-			onFailure=onFailure==null?this.onFailure:onFailure;
-			Fr.models.list(this,onSuccess,onFailure);
+			checkCannotUse();
+			onSuccessDo=onSuccessDo==null?this.onSuccessDo:onSuccessDo;
+			onFailureDo=onFailureDo==null?this.onFailureDo:onFailureDo;
+			Fr.models.list(this,onSuccessDo,onFailureDo);
+		}
+		/*
+		[Ignored]
+		public function attach(onSuccessDo:Function=null,onFailureDo:Function=null):void
+		{
+			currentAction="attach";
+			checkCannotUse();
+			onSuccessDo=onSuccessDo==null?this.onSuccessDo:onSuccessDo;
+			onFailureDo=onFailureDo==null?this.onFailureDo:onFailureDo;
+			Fr.models.attach(attachedFile,this,onSuccessDo,onFailureDo);
+		}
+		*/
+		[Ignored]
+		private function checkCannotUse():void
+		{
+			if(!canUseBaseCRUDMethods)
+			{
+				cannotUse();
+			}
 		}
 		[Ignored]
 		protected function cannotUse():void
 		{
-			throw new Error("This method is unavailable for this model!!");
+			throw new Error("Method::"+currentAction+" is unavailable for model :"+getQualifiedClassName(this).toString());
 		}
 		/*
-		public function index(optsOrOnSuccess:Object=null, onFailure:Function=null):void
+		public function index(optsOronSuccessDo:Object=null, onFailureDo:Function=null):void
 		{
-			Fr.models.show(this,onSuccess,onFailure);
+			Fr.models.show(this,onSuccessDo,onFailureDo);
 		}
 		*/
 		[Ignored]
@@ -257,7 +302,23 @@ package org.frest.models
 				Fr.crudTransactionQueue.doNextTransaction();
 			}
 		}
-
+		[Ignored]
+		private function onFailureDo(event:Object):void
+		{
+			onFailure(event);
+			clearObject(event)
+		}
+		[Ignored]
+		private function onSuccessDo(event:Object):void
+		{
+			onSuccess(event);
+			clearObject(event)
+		}
+		[Ignored]
+		private function clearObject(event:Object):void
+		{
+			event=null;
+		}
 		[Ignored]
 		protected function onSuccess(event:Object):void
 		{

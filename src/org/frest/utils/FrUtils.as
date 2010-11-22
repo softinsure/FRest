@@ -11,6 +11,7 @@ package org.frest.utils
 	import com.adobe.utils.DateUtil;
 	
 	import flash.events.TimerEvent;
+	import flash.geom.Utils3D;
 	import flash.utils.ByteArray;
 	import flash.utils.Timer;
 	import flash.utils.describeType;
@@ -41,10 +42,12 @@ package org.frest.utils
 		{
 			FlexGlobals.topLevelApplication=application;
 		}
+		/*
 		public static function setSessionTimer(functionToCall:Function):void
 		{
 			applicationUsed.systemManager.addEventListener(FlexEvent.IDLE,functionToCall);
 		}
+		*/
 		public static function addParentID(parent:Object,child:Object):void
 		{
 			var pid:String=FrUtils.toSnakeCase(FrUtils.getObjectName(parent))+"_id";
@@ -72,10 +75,17 @@ package org.frest.utils
 		{
 			return str == null || str == "";
 		}
-		public static function base64EncodeString(data:String):String
+		public static function base64EncodeString(data:*):String
 		{
 			var base64:Base64Encoder = new Base64Encoder();
-			base64.encode(data);
+			if(data is ByteArray)
+			{
+				base64.encodeBytes(data);
+			}
+			else 
+			{
+				base64.encode(data);
+			}
 			return base64.toString();
 		}
 		public static function base64EDecodeString(encoded:String):ByteArray
@@ -377,7 +387,10 @@ package org.frest.utils
 					case "search":
 						url=url+".xml";
 						break;
-	        		default:
+/*					case "attach":
+						url=url+"/create";
+						break;
+*/	        		default:
 						if(object.id>0)
 						{
 							url=url+"/"+action.toLowerCase()+"/"+object.id+".xml";
